@@ -2,7 +2,10 @@ package com.csmithswim;
 
 public class Main {
 
+
     public static void main(String[] args) {
-	// write your code here
+        Program bankApplication = new Program(true);
+
+        bankApplication.run();
     }
 }
