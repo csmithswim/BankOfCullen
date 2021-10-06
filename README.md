@@ -3,21 +3,22 @@ Java application that models a bank and credit card system. Project description 
 TODO
 What are advantages of DO-WHILE vs WHILE
 Make try/catch block for getting input
+How do you orient a card class in my bank UML?
 
-    /*
-    START PROGRAM
-    PRINT SELECTION
-        1. Create an account
+    /*[]
+    [x]START PROGRAM
+    [x]PRINT SELECTION
+        "1. Create an account
         2. Log into account
-        0. Exit
-    IF 1
-        GENERATE NEW CC #
-        GENERATE PIN # THAT BELONG STO CC #, SHOULD BE IN RANGE 0000 - 9999
-        SET BALANCE TO 0.00
-        DISPLAY CC # AND CARD PIN
-            BREAK
+        0. Exit"
+    [x]IF 1
+        [x]GENERATE NEW CC #
+        [x]GENERATE PIN # THAT BELONG STO CC #, SHOULD BE IN RANGE 0000 - 9999
+        []SET BALANCE TO 0.00
+        [x]DISPLAY CC # AND CARD PIN
+            [x]BREAK
     ELSE IF 2
-        ASK CLIENT TO INPUT CC INFORMATION
+        []ASK CLIENT TO INPUT CC INFORMATION
             IF CC INFORMATION
                 PRINT "You have successfully logged in!"
                 PRINT SELECTION
@@ -32,7 +33,7 @@ Make try/catch block for getting input
                     BREAK;
 
         ELSE PRINT "WRONG CARD NUMBER OR pin!"
-    ELF IF 0
+    [x]ELSE IF 0
         PRINT "Bye!"
         BREAK
 
