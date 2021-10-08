@@ -80,17 +80,50 @@ public class Program {
         //pair them together?
 
         //generate random number from 0 to 9, add it to 400000
-        Random random = new Random();
+        Random        random                 = new Random();
         StringBuilder randomCreditCardNumber = new StringBuilder("400000");
 
-        for (int i = 0; i < 10; i++) {
-            randomCreditCardNumber.append(random.nextInt(9) + 1);
+        for (int i = 0; i < 9; i++) {
+            int randomNumber = random.nextInt(9) + 1;
+            randomCreditCardNumber.append(randomNumber);
         }
+
+        String randomCreditCardNumberString = new String(randomCreditCardNumber);
+        System.out.println(randomCreditCardNumberString);
+        int sum      = 0;
+        int checkSum = 0;
+        String[] stringArray = randomCreditCardNumberString.split("");
+
+        for (int i = 0; i < stringArray.length; i++) {
+            int x = Integer.parseInt(stringArray[i]);
+            if (i % 2 == 0) {
+                System.out.println("i is even and " + x + " is changed to " + (x * 2));
+                x *= 2;
+            }
+            if (x > 9) {
+                System.out.println(x + " is > 9 " + " and changed to " + (x - 9));
+                x -= 9;
+            }
+
+            sum += x;
+
+            System.out.println("sum : " + sum);
+
+            if (i == stringArray.length - 1) {
+                while ((sum + checkSum) % 10 != 0) {
+                    checkSum++;
+                }
+                randomCreditCardNumberString += String.valueOf(checkSum);
+            }
+        }
+
+
         System.out.println("\nYour card has been created\n" +
-                "Your card number:");
-        System.out.println(randomCreditCardNumber);
-        System.out.println(randomCreditCardNumber.length());
-        return randomCreditCardNumber.toString();
+            "Your card number:");
+
+        System.out.println(randomCreditCardNumberString);
+        System.out.println(randomCreditCardNumberString.length());
+        return randomCreditCardNumberString;
     }
 
     protected String createCreditCardPin() {
