@@ -3,6 +3,7 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
+
 public class Program {
 
     protected boolean program = true;
@@ -54,6 +55,8 @@ public class Program {
            }
         }
     }
+
+
 
     protected boolean checkLoginCredentials(long[] userAccount) {
         if (account[0] == userAccount[0] && account[1] == userAccount[1]) {
