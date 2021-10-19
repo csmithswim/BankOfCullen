@@ -126,6 +126,7 @@ public class Program {
 
         System.out.println(randomCreditCardNumberString);
         System.out.println(randomCreditCardNumberString.length());
+
         return randomCreditCardNumberString;
     }
 
