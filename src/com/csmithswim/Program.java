@@ -1,8 +1,7 @@
 package com.csmithswim;
-import java.util.Arrays;
+import javax.xml.crypto.Data;
 import java.util.Random;
 import java.util.Scanner;
-
 
 public class Program {
 
@@ -12,6 +11,12 @@ public class Program {
     Program(boolean program) {
         this.program = program;
     }
+
+        /*  CARD TABLE COLUMNS
+            id INTEGER
+            number TEXT
+            pin TEXT
+            balance INTEGER DEFAULT 0 */
 
     protected void run() {
         while (program) {
@@ -56,11 +61,10 @@ public class Program {
         }
     }
 
-
-
+    //Query database and check if account number and pin is correct
     protected boolean checkLoginCredentials(long[] userAccount) {
         if (account[0] == userAccount[0] && account[1] == userAccount[1]) {
-            System.out.println("\nYou have succesfully logged in!\n");
+            System.out.println("\nYou have successfully logged in!\n");
             return true;
         } else {
             System.out.println("Wrong card number or PIN!");
@@ -69,20 +73,21 @@ public class Program {
     }
 
     protected void createCreditCardAccount() {
-        account[0] = Long.parseLong(createCreditCardNumber());
-        account[1] = Integer.parseInt(createCreditCardPin());
+        //make ID & INSERT INTO BANK
+        int id = 1;
+        String creditCardAccount = createCreditCardNumber();
+        String pin = createCreditCardPin();
+        int balance = 0;
+
+        Database.insertTableValues(id, creditCardAccount, pin, balance);
+        Database.queryAndDisplayTable();
+
+//        account[0] = Long.parseLong(createCreditCardNumber());
+//        account[1] = Integer.parseInt(createCreditCardPin());
+
     }
 
-    //Number begins with 4
-    //BIN(Banking Identification Number) must be 400_000
-    //7th digit to the second to last digit is the customer account number.
-    //Whole number is 16 digits
     protected String createCreditCardNumber() {
-        //set CC #
-        //set pin #
-        //pair them together?
-
-        //generate random number from 0 to 9, add it to 400000
         Random        random                 = new Random();
         StringBuilder randomCreditCardNumber = new StringBuilder("400000");
 
@@ -92,7 +97,6 @@ public class Program {
         }
 
         String randomCreditCardNumberString = new String(randomCreditCardNumber);
-        System.out.println(randomCreditCardNumberString);
         int sum      = 0;
         int checkSum = 0;
         String[] stringArray = randomCreditCardNumberString.split("");
@@ -100,17 +104,13 @@ public class Program {
         for (int i = 0; i < stringArray.length; i++) {
             int x = Integer.parseInt(stringArray[i]);
             if (i % 2 == 0) {
-                System.out.println("i is even and " + x + " is changed to " + (x * 2));
                 x *= 2;
             }
             if (x > 9) {
-                System.out.println(x + " is > 9 " + " and changed to " + (x - 9));
                 x -= 9;
             }
 
             sum += x;
-
-            System.out.println("sum : " + sum);
 
             if (i == stringArray.length - 1) {
                 while ((sum + checkSum) % 10 != 0) {
@@ -120,12 +120,10 @@ public class Program {
             }
         }
 
-
-        System.out.println("\nYour card has been created\n" +
-            "Your card number:");
-
-        System.out.println(randomCreditCardNumberString);
-        System.out.println(randomCreditCardNumberString.length());
+//        System.out.println("\nYour card has been created\n" +
+//            "Your card number:");
+//
+//        System.out.println(randomCreditCardNumberString);
 
         return randomCreditCardNumberString;
     }
@@ -137,12 +135,10 @@ public class Program {
         for (int i = 0; i < 4; i++) {
             randomCreditCardPin.append(random.nextInt(10));
         }
-        System.out.println("Your card PIN:");
-        System.out.println(randomCreditCardPin + "\n");
+//        System.out.println("Your card PIN:");
+//        System.out.println(randomCreditCardPin + "\n");
+
         return randomCreditCardPin.toString();
     }
-
-//    protected void setCreditCardInformation(int creditCardNumber)
-
 
 }
