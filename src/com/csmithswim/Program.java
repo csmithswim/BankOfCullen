@@ -1,5 +1,4 @@
 package com.csmithswim;
-import javax.xml.crypto.Data;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,12 +10,6 @@ public class Program {
     Program(boolean program) {
         this.program = program;
     }
-
-        /*  CARD TABLE COLUMNS
-            id INTEGER
-            number TEXT
-            pin TEXT
-            balance INTEGER DEFAULT 0 */
 
     protected void run() {
         while (program) {
@@ -34,26 +27,25 @@ public class Program {
                 createCreditCardAccount();
                 continue;
             } else if (userInput == 2) {
-                System.out.println("Enter your card number:");
+
+                System.out.println("\nEnter your card number:");
                 String cardNumber = scanner.next();
                 scanner.nextLine();
                 System.out.println("Enter your pin:");
                 String cardPin = scanner.nextLine();
 
-                System.out.println(cardNumber);
+                int balance = Database.queryAndDisplayTable(cardNumber, cardPin);
 
-                System.out.println(cardPin);
-
-                Database.queryAndDisplayTable(cardNumber, cardPin);
                     while (true) {
                         System.out.println("1. Balance\n" +
                                 "2. Log out\n" +
                                 "0. Exit");
                         int input = scanner.nextInt();
                         if (input == 1) {
-                            System.out.println("Balance: 0");
+                            System.out.println("\nBalance: " + balance + "\n");
                             continue;
                         } else if (input == 2) {
+                            System.out.println("\nYou have successfully logged out!\n");
                             break;
                         } else if (input == 0) {
                             program = false;
@@ -66,31 +58,13 @@ public class Program {
         }
     }
 
-//    Query database and check if account number and pin is correct
-//    protected boolean checkLoginCredentials(String account, String pin) {
-//        Database.queryAndDisplayTable();
-//
-//        if (account[0] == userAccount[0] && account[1] == userAccount[1]) {
-//            System.out.println("\nYou have successfully logged in!\n");
-//            return true;
-//        } else {
-//            System.out.println("Wrong card number or PIN!");
-//            return false;
-//        }
-//    }
-
     protected void createCreditCardAccount() {
-        //make ID & INSERT INTO BANK
         int id = 1;
         String creditCardAccount = createCreditCardNumber();
         String pin = createCreditCardPin();
         int balance = 0;
 
         Database.insertTableValues(id, creditCardAccount, pin, balance);
-
-//        account[0] = Long.parseLong(createCreditCardNumber());
-//        account[1] = Integer.parseInt(createCreditCardPin());
-
     }
 
     protected String createCreditCardNumber() {
@@ -126,11 +100,6 @@ public class Program {
             }
         }
 
-//        System.out.println("\nYour card has been created\n" +
-//            "Your card number:");
-//
-//        System.out.println(randomCreditCardNumberString);
-
         return randomCreditCardNumberString;
     }
 
@@ -141,10 +110,6 @@ public class Program {
         for (int i = 0; i < 4; i++) {
             randomCreditCardPin.append(random.nextInt(10));
         }
-//        System.out.println("Your card PIN:");
-//        System.out.println(randomCreditCardPin + "\n");
-
         return randomCreditCardPin.toString();
     }
-
 }
