@@ -63,8 +63,11 @@ public class Database {
         System.out.println(message);
     }
 
-    protected static void queryAndDisplayTable() {
-
+    protected static void queryAndDisplayTable(String userCard, String userPin) {
+        int id = 1;
+        String number = "";
+        String pin = "";
+        int balance = 0;
         String url = "jdbc:sqlite:bank.db";
 
         SQLiteDataSource dataSource = new SQLiteDataSource();
@@ -75,10 +78,10 @@ public class Database {
 
                 ResultSet cardInfo = statement.executeQuery("SELECT * FROM CARD");{
                     while (cardInfo.next()) {
-                        int    id      = cardInfo.getInt("id");
-                        String number  = cardInfo.getString("number");
-                        String pin     = cardInfo.getString("pin");
-                        int    balance = cardInfo.getInt("balance");
+                        id      = cardInfo.getInt("id");
+                        number  = cardInfo.getString("number");
+                        pin     = cardInfo.getString("pin");
+                        balance = cardInfo.getInt("balance");
 
 
                         /*
@@ -97,6 +100,9 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        System.out.println(userCard.equals(number));
+        System.out.println(userPin.equals(pin));
     }
 }
 
