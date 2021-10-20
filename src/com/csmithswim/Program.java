@@ -25,39 +25,39 @@ public class Program {
                     "0. Exit");
             Scanner scanner = new Scanner(System.in);
             System.out.println(message);
-           int userInput = scanner.nextInt();
-           if (userInput == 0) {
-               message.replace(0, message.length(), "\nBye!");
-               System.out.println(message);
+            int userInput = scanner.nextInt();
+            if (userInput == 0) {
+                message.replace(0, message.length(), "\nBye!");
+                System.out.println(message);
                 break;
-           } else if (userInput == 1) {
-               createCreditCardAccount();
-               continue;
-           } else if (userInput == 2) {
-               System.out.println("\nEnter your card number:");
-               long cardNumber = scanner.nextLong();
-               System.out.println("Enter your pin:");
-               int cardPin = scanner.nextInt();
+            } else if (userInput == 1) {
+                createCreditCardAccount();
+                continue;
+            } else if (userInput == 2) {
+                System.out.println("\nEnter your card number:");
+                long cardNumber = scanner.nextLong();
+                System.out.println("Enter your pin:");
+                int cardPin = scanner.nextInt();
 
-               if (checkLoginCredentials(new long[]{cardNumber, cardPin})) {
-                   while (true) {
-                       System.out.println("1. Balance\n" +
-                               "2. Log out\n" +
-                               "0. Exit");
-                       int input = scanner.nextInt();
-                       if (input == 1) {
-                           System.out.println("Balance: 0");
-                           continue;
-                       } else if (input == 2) {
-                           break;
-                       } else if (input == 0) {
-                           program = false;
-                           System.out.println("\nBye!");
-                           break;
-                       }
-                   }
-               }
-           }
+                if (checkLoginCredentials(new long[]{cardNumber, cardPin})) {
+                    while (true) {
+                        System.out.println("1. Balance\n" +
+                                "2. Log out\n" +
+                                "0. Exit");
+                        int input = scanner.nextInt();
+                        if (input == 1) {
+                            System.out.println("Balance: 0");
+                            continue;
+                        } else if (input == 2) {
+                            break;
+                        } else if (input == 0) {
+                            program = false;
+                            System.out.println("\nBye!");
+                            break;
+                        }
+                    }
+                }
+            }
         }
     }
 

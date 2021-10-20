@@ -34,28 +34,33 @@ public class Database {
 
     protected static void insertTableValues(int id, String creditCardNumber, String pin, int balance) {
 
-            String url = "jdbc:sqlite:bank.db";
+        StringBuilder message = new StringBuilder();
 
-            SQLiteDataSource dataSource = new SQLiteDataSource();
-            dataSource.setUrl(url);
+        String url = "jdbc:sqlite:bank.db";
 
-            try (Connection conn = DriverManager.getConnection(url)) {
-                try (Statement statement = conn.createStatement()) {
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+        dataSource.setUrl(url);
 
-                    int i = statement.executeUpdate("UPDATE CARD " +
-                            "SET id = " + id +
-                            ",number = " + creditCardNumber +
-                            ",pin = " + pin +
-                            ",balance = " + balance);
+        try (Connection conn = DriverManager.getConnection(url)) {
+            try (Statement statement = conn.createStatement()) {
+
+                int i = statement.executeUpdate("UPDATE CARD " +
+                        "SET id = " + id +
+                        ",number = " + creditCardNumber +
+                        ",pin = " + pin +
+                        ",balance = " + balance);
 
 //                    System.out.println(i);
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        message.append("\nYour card has been created\nYour card number:\n")
+                .append(creditCardNumber).append("\nYour card PIN:\n").append(pin).append("\n");
+        System.out.println(message);
     }
 
     protected static void queryAndDisplayTable() {
@@ -68,9 +73,6 @@ public class Database {
         try (Connection conn = DriverManager.getConnection(url)) {
             try (Statement statement = conn.createStatement()) {
 
-                int i = statement.executeUpdate("INSERT INTO CARD VALUES " +
-                        "(1, '123456789', '1234', 1000)");
-
                 ResultSet cardInfo = statement.executeQuery("SELECT * FROM CARD");{
                     while (cardInfo.next()) {
                         int    id      = cardInfo.getInt("id");
@@ -79,7 +81,6 @@ public class Database {
                         int    balance = cardInfo.getInt("balance");
 
 
-                        System.out.println(id + "\n" + number + "\n" + pin + "\n" + balance);
                         /*
                         Your card has been created
                         Your card number:
@@ -100,19 +101,11 @@ public class Database {
 }
 
 
+/*
 
-
-
-
-
-
-
-
-
-
-
-
-
+                int i = statement.executeUpdate("INSERT INTO CARD VALUES " +
+                        "(1, '123456789', '1234', 1000)");
+ */
 
 
 
