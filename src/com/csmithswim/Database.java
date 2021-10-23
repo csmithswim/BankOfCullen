@@ -89,7 +89,6 @@ public class Database {
         return userAccountDetails;
     }
 
-
     protected static void addIncome(int id, int amountToTransfer) {
         SQLiteDataSource dataSource = new SQLiteDataSource();
 
@@ -110,6 +109,19 @@ public class Database {
         } catch (SQLException e) {
         e.printStackTrace();
     }
+
+    }
+
+    //String sendingAccountId, String receivingAccountId, int amount
+    protected static void transfer(String senderId, String receiverId,
+                                   int transferAmount, int balance) {
+        //validation with console messages
+        StringBuilder console = new StringBuilder();
+
+
+
+
+
 
     }
 

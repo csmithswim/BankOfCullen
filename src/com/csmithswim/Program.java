@@ -1,5 +1,6 @@
 package com.csmithswim;
 import javax.xml.crypto.Data;
+import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -59,16 +60,33 @@ public class Program {
                             System.out.println("Enter income:");
                             int transferAmount = scanner.nextInt();
                             Database.addIncome(id, transferAmount);
-                            System.out.println();
-                            break;
+                            System.out.println("Income was added!");
+                            continue;
                         } else if (input == 0) {
                             program = false;
                             System.out.println("\nBye!");
                             break;
                         } else if (input == 3) {
+                            System.out.println("Transfer\nEnter card number:\n");
+                            String userAccountInput = scanner.nextLine();
+                            if (luhnAlgorithmValidator(userAccountInput) == false) {
+                                continue;
+                            }
+
+                            if (transferAmount > balance) {
+                                System.out.println(console.append("Not enough money!"));
+                            }
 
                             break;
                         } else if (input == 4) {
+
+
+
+//
+
+//                            if (senderId.equals(receiverId)) {
+//                                System.out.println(console.replace(0, console.length(), "You can't transfer money to the same account!"));
+//                            }
 
                             break;
                         } else if (input == 5) {
@@ -80,6 +98,32 @@ public class Program {
             }
         }
     }
+
+    protected boolean luhnAlgorithmValidator(String input) {
+        String[] inputArray = input.split("");
+        int sum = 0; 
+        
+        for (int i = 0; i < inputArray.length - 1; i++) {
+            int x = Integer.parseInt(inputArray[i]);
+                if (i % 2 == 0) {
+                    x *= 2;
+                }
+                if (x > 9) {
+                    x -= 9;
+                }
+
+            sum += x;
+        }
+
+        if ((sum + Integer.parseInt(inputArray[inputArray.length - 1])) % 10 != 0) {
+            System.out.println("Probably you made a mistake in the card number. Please try again!");
+            return false;
+        } else {
+            System.out.println("It does pass the luhn test!");
+            return true;
+        }
+    }
+
 
     protected void createCreditCardAccount() {
         String creditCardAccount = createCreditCardNumber();
@@ -106,12 +150,12 @@ public class Program {
 
         for (int i = 0; i < stringArray.length; i++) {
             int x = Integer.parseInt(stringArray[i]);
-            if (i % 2 == 0) {
-                x *= 2;
-            }
-            if (x > 9) {
-                x -= 9;
-            }
+                if (i % 2 == 0) {
+                    x *= 2;
+                }
+                if (x > 9) {
+                    x -= 9;
+                }
 
             sum += x;
 
