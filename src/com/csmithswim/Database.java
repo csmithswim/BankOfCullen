@@ -4,7 +4,6 @@ import org.sqlite.SQLiteDataSource;
 import java.sql.*;
 
 public class Database {
-
     static String url = "";
 
     protected static void createBankDatabase(String name) {
@@ -50,11 +49,11 @@ public class Database {
         System.out.println(message);
     }
 
-    protected static int queryAndDisplayTable(String userCard, String userPin) {
-        int id = 1;
+    protected static String[] queryAndDisplayTable(String userCard, String userPin) {
+        String[] userAccountDetails = new String[4];
         String number = "";
         String pin = "";
-        int balance = 0;
+        int balance;
 
         StringBuilder message = new StringBuilder();
 
@@ -66,11 +65,12 @@ public class Database {
 
                 ResultSet cardInfo = statement.executeQuery("SELECT * FROM CARD");{
                     while (cardInfo.next()) {
-                        id      = cardInfo.getInt("id");
+                        int id      = cardInfo.getInt("id");
                         number  = cardInfo.getString("number");
                         pin     = cardInfo.getString("pin");
                         balance = cardInfo.getInt("balance");
 
+                        userAccountDetails = new String[]{String.valueOf(id), number, pin, String.valueOf(balance)};
                     }
                 }
             } catch (SQLException e) {
@@ -86,6 +86,31 @@ public class Database {
             message.replace(0, message.length(), "\nWrong card number or PIN!\n");
         }
         System.out.println(message);
-        return balance;
+        return userAccountDetails;
     }
+
+
+    protected static void addIncome(int id, int amountToTransfer) {
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+
+        dataSource.setUrl(url);
+
+        String sql = "UPDATE card SET balance = ? + balance "
+                + "WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(url)) {
+            try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
+
+                preparedStatement.setInt(1, amountToTransfer);
+                preparedStatement.setInt(2, id);
+                preparedStatement.executeUpdate();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    }
+
 }

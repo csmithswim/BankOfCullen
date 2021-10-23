@@ -1,4 +1,5 @@
 package com.csmithswim;
+import javax.xml.crypto.Data;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -6,6 +7,8 @@ public class Program {
 
     protected boolean program = true;
     protected long[] account = new long[2];
+    static int id = 1;
+
 
     Program(boolean program) {
         this.program = program;
@@ -34,22 +37,42 @@ public class Program {
                 System.out.println("Enter your pin:");
                 String cardPin = scanner.nextLine();
 
-                int balance = Database.queryAndDisplayTable(cardNumber, cardPin);
+                String[] accountDetails = Database.queryAndDisplayTable(cardNumber, cardPin);
+
+                int id = Integer.parseInt(accountDetails[0]);
+                String creditCardNumber = accountDetails[1];
+                String pin = accountDetails[2];
+                int balance = Integer.parseInt(accountDetails[3]);
 
                     while (true) {
                         System.out.println("1. Balance\n" +
-                                "2. Log out\n" +
+                                "2. Add income\n" +
+                                "3. Do transfer\n" +
+                                "4. Close account\n" +
+                                "5. Log out\n" +
                                 "0. Exit");
                         int input = scanner.nextInt();
                         if (input == 1) {
                             System.out.println("\nBalance: " + balance + "\n");
                             continue;
                         } else if (input == 2) {
-                            System.out.println("\nYou have successfully logged out!\n");
+                            System.out.println("Enter income:");
+                            int transferAmount = scanner.nextInt();
+                            Database.addIncome(id, transferAmount);
+                            System.out.println();
                             break;
                         } else if (input == 0) {
                             program = false;
                             System.out.println("\nBye!");
+                            break;
+                        } else if (input == 3) {
+
+                            break;
+                        } else if (input == 4) {
+
+                            break;
+                        } else if (input == 5) {
+                            System.out.println("\nYou have successfully logged out!\n");
                             break;
                         }
                     }
@@ -59,12 +82,12 @@ public class Program {
     }
 
     protected void createCreditCardAccount() {
-        int id = 1;
         String creditCardAccount = createCreditCardNumber();
         String pin = createCreditCardPin();
         int balance = 0;
 
         Database.insertTableValues(id, creditCardAccount, pin, balance);
+        id++;
     }
 
     protected String createCreditCardNumber() {
