@@ -49,6 +49,40 @@ public class Database {
         System.out.println(message);
     }
 
+    protected static void queryAndValidateCard(String transferAccount) {
+        String number = "";
+
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+
+        dataSource.setUrl(url);
+
+        String sql = "SELECT number FROM card "
+                + "WHERE number = ?";
+
+        try (Connection conn = DriverManager.getConnection(url)) {
+            try (PreparedStatement preparedStatement = conn.prepareStatement (sql)) {
+                preparedStatement.setString(1, transferAccount);
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                while (rs.next()) {
+                    number = rs.getString("number");
+                }
+
+
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (number.isEmpty()) {
+            System.out.println("Such a card does not exist.\n");
+        }
+        System.out.println(number);
+    }
+
     protected static String[] queryAndDisplayTable(String userCard, String userPin) {
         String[] userAccountDetails = new String[4];
         String number = "";
@@ -109,19 +143,6 @@ public class Database {
         } catch (SQLException e) {
         e.printStackTrace();
     }
-
-    }
-
-    //String sendingAccountId, String receivingAccountId, int amount
-    protected static void transfer(String senderId, String receiverId,
-                                   int transferAmount, int balance) {
-        //validation with console messages
-        StringBuilder console = new StringBuilder();
-
-
-
-
-
 
     }
 

@@ -68,16 +68,16 @@ public class Program {
                             break;
                         } else if (input == 3) {
                             System.out.println("Transfer\nEnter card number:\n");
+                            scanner.nextLine();
                             String userAccountInput = scanner.nextLine();
+
                             if (luhnAlgorithmValidator(userAccountInput) == false) {
                                 continue;
                             }
 
-                            if (transferAmount > balance) {
-                                System.out.println(console.append("Not enough money!"));
-                            }
+                            Database.queryAndValidateCard(userAccountInput);
 
-                            break;
+                            continue;
                         } else if (input == 4) {
 
 
@@ -119,7 +119,6 @@ public class Program {
             System.out.println("Probably you made a mistake in the card number. Please try again!");
             return false;
         } else {
-            System.out.println("It does pass the luhn test!");
             return true;
         }
     }
