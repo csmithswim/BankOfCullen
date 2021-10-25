@@ -1,6 +1,4 @@
 package com.csmithswim;
-import javax.xml.crypto.Data;
-import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -38,14 +36,9 @@ public class Program {
                 System.out.println("Enter your pin:");
                 String cardPin = scanner.nextLine();
 
-                String[] accountDetails = Database.queryAndDisplayTable(cardNumber, cardPin);
-
-                int id = Integer.parseInt(accountDetails[0]);
-                String creditCardNumber = accountDetails[1];
-                String pin = accountDetails[2];
-                int balance = Integer.parseInt(accountDetails[3]);
-
+                if (Database.queryAndValidateLogin(cardNumber, cardPin)) {
                     while (true) {
+
                         System.out.println("1. Balance\n" +
                                 "2. Add income\n" +
                                 "3. Do transfer\n" +
@@ -54,12 +47,12 @@ public class Program {
                                 "0. Exit");
                         int input = scanner.nextInt();
                         if (input == 1) {
-                            System.out.println("\nBalance: " + balance + "\n");
+                            System.out.println("\nBalance: " + Database.displayBalance(cardNumber) + "\n");
                             continue;
                         } else if (input == 2) {
                             System.out.println("Enter income:");
                             int transferAmount = scanner.nextInt();
-                            Database.addIncome(id, transferAmount);
+                            Database.depositFunds(cardNumber, transferAmount);
                             System.out.println("Income was added!");
                             continue;
                         } else if (input == 0) {
@@ -67,26 +60,32 @@ public class Program {
                             System.out.println("\nBye!");
                             break;
                         } else if (input == 3) {
-                            System.out.println("Transfer\nEnter card number:\n");
+                            System.out.println("Transfer\nEnter card number:");
                             scanner.nextLine();
                             String userAccountInput = scanner.nextLine();
 
                             if (luhnAlgorithmValidator(userAccountInput) == false) {
                                 continue;
                             }
+                            if (Database.queryAndValidateCard(userAccountInput) == false) {
+                                continue;
+                            }
+                            if (userAccountInput.equals(cardNumber)) {
+                                System.out.println("You can't transfer money to your own account!");
+                                continue;
+                            }
+                            System.out.println("Enter how much money you want to transfer:");
+                            int amount = scanner.nextInt();
+                            if (amount > Database.displayBalance(cardNumber)) {
+                                System.out.println("Not enough money!");
+                            } else {
+                                Database.depositFunds(userAccountInput,amount);
+                                Database.deductFunds(cardNumber, amount);
+                                continue;
+                            }
 
-                            Database.queryAndValidateCard(userAccountInput);
-
-                            continue;
                         } else if (input == 4) {
 
-
-
-//
-
-//                            if (senderId.equals(receiverId)) {
-//                                System.out.println(console.replace(0, console.length(), "You can't transfer money to the same account!"));
-//                            }
 
                             break;
                         } else if (input == 5) {
@@ -94,7 +93,7 @@ public class Program {
                             break;
                         }
                     }
-
+                }
             }
         }
     }
