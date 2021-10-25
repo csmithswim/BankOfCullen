@@ -107,8 +107,6 @@ public class Database {
                     while (cardInfo.next()) {
                         number  = cardInfo.getString("number");
                         pin     = cardInfo.getString("pin");
-                        System.out.println(number);
-                        System.out.println(pin);
                     }
                 }
             } catch (SQLException e) {
@@ -234,4 +232,25 @@ public class Database {
 
         return balance;
     }
+
+    protected static void deleteAccount(String accountNumber) {
+        SQLiteDataSource dataSource = new SQLiteDataSource();
+        dataSource.setUrl(url);
+
+        String sql = "DELETE FROM card "
+                + "WHERE number = ?";
+
+        try (Connection conn = DriverManager.getConnection(url)) {
+            try (PreparedStatement preparedStatement = conn.prepareStatement (sql)) {
+                preparedStatement.setString(1, accountNumber);
+                preparedStatement.executeUpdate();
+            }catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("The account has been closed!\n");
+    }
+
 }

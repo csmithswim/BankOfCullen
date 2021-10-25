@@ -83,10 +83,8 @@ public class Program {
                                 Database.deductFunds(cardNumber, amount);
                                 continue;
                             }
-
                         } else if (input == 4) {
-
-
+                            Database.deleteAccount(cardNumber);
                             break;
                         } else if (input == 5) {
                             System.out.println("\nYou have successfully logged out!\n");
