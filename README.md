@@ -1,8 +1,18 @@
-Java application that models a bank and credit card system. 
+## The Bank Of Cullen ##
 
-This program generates a random sixteen digit credit card number based upon the Luhn algorithm and generates
-a random four digit pin to correspond to the credit card. This information is stored using sqlite within
-the program's folder and is used to validate the user's credentials when they log in.
+A Simple Banking and Credit Card Java Application.
 
-TODO
-[]Refactor Database class
+-------------
+
+#### Features
+
+* A unique user can be created and their information such as their credit card number, balance and pin are stored in the application.
+* The storage is an embedded SQLite database and all database management is done by JDBC.
+* Users can be created, logged out, check their balance, deposit money to their personal accounts, transfer money to other accounts and be deleted. 
+* Account authentication, deposits, transfers and user details are validated by checking their details and also validated by using the Luhn algorithm, an algorithm commonly 
+  used to 
+  validate 
+  credit card numbers and social security numbers.
+
+### How The Application Works ###
+
