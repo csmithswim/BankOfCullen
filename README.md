@@ -48,8 +48,8 @@ card number.
 More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
 
 **My Implementation of The Luhn Algorithm**
-
-```protected boolean luhnAlgorithmValidator(String input) {
+```
+protected boolean luhnAlgorithmValidator(String input) {
   String[] inputArray = input.split("");
   int sum = 0;
   for (int i = 0; i < inputArray.length - 1; i++) {
