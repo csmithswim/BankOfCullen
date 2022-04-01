@@ -49,9 +49,8 @@ More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
 
 **My Implementation of The Luhn Algorithm**
 
-code()
-Markup : `code()`
-protected boolean luhnAlgorithmValidator(String input) {
+Markup : 
+`protected boolean luhnAlgorithmValidator(String input) {
 String[] inputArray = input.split("");
 int sum = 0;
 for (int i = 0; i < inputArray.length - 1; i++) {
@@ -70,6 +69,6 @@ return false;
 } else {
 return true;
 }
-}
+}`
 
 
