@@ -16,3 +16,31 @@ A Simple Banking and Credit Card Java Application.
 
 ### How The Application Works ###
 
+* Application is managed through a command line interface and is run through command line arguments. 
+* Accounts are created using a method that will generate a credit card number that is based upon common principles in the financial industry such as a Major Industry Identifier, 
+  Bank Identification Number and validated using a Luhn algorithm.
+* A randomly generated pin is generated and associated with each new account. 
+* A BANK database with a CARD table is created on the initial run of the application and the database will persist after the application stops. 
+* The database is a SQLite database and all SQL commands are facilitated with JDBC. 
+* Each entity contains an ID, credit card number, a pin and balance. 
+* A created account has the following features:
+    * Viewing their balance.
+    * Adding income to their account.
+    * Transferring money to another account.
+    * Closing their account.
+    * Logging out.
+    * Exiting the application.
+* The application has several error handling and validation features such as:
+    * Authenticating a user based upon their pin and credit card number.
+    * Authenticating a credit card number based upon the Luhn algorithm principles.
+    * Transferring an amount larger than an account's balance.
+    * Transferring money to the same account.
+    * Checking a receiving account's existence. 
+
+-------------
+
+### Closer Glance At The Luhn Algorithm
+
+
+
+
