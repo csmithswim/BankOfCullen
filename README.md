@@ -44,6 +44,32 @@ A Simple Banking and Credit Card Java Application.
 ![luhn_algorithm](https://github.com/csmithswim/BankOfCullen/blob/main/images/Luhn%20Algorithm.png)
 
 Above illustrates the specific properties a number must have for it to be considered a valid credit card number. A number's check digit is calculated to validate the credit 
-card number. More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
+card number. 
+More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
+
+**My Implementation of The Luhn Algorithm**
+
+code()
+Markup : `code()`
+protected boolean luhnAlgorithmValidator(String input) {
+String[] inputArray = input.split("");
+int sum = 0;
+for (int i = 0; i < inputArray.length - 1; i++) {
+int x = Integer.parseInt(inputArray[i]);
+if (i % 2 == 0) {
+x *= 2;
+}
+if (x > 9) {
+x -= 9;
+}
+sum += x;
+}
+if ((sum + Integer.parseInt(inputArray[inputArray.length - 1])) % 10 != 0) {
+System.out.println("Probably you made a mistake in the card number. Please try again!");
+return false;
+} else {
+return true;
+}
+}
 
 
