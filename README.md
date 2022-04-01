@@ -41,6 +41,9 @@ A Simple Banking and Credit Card Java Application.
 
 ### Closer Glance At The Luhn Algorithm
 
+![luhn_algorithm](https://github.com/csmithswim/BankOfCullen/blob/main/images/Luhn%20Algorithm.png)
 
+Above illustrates the specific properties a number must have for it to be considered a valid credit card number. A number's check digit is calculated to validate the credit 
+card number. More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
 
 
