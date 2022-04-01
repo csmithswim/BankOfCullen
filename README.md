@@ -69,6 +69,6 @@ More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
   } else {
     return true;
   }
-}```
+}
 
 
