@@ -53,7 +53,7 @@ protected boolean luhnAlgorithmValidator(String input) {
   String[] inputArray = input.split("");
   int sum = 0;
   for (int i = 0; i < inputArray.length - 1; i++) {
-  int x = Integer.parseInt(inputArray[i]);
+    int x = Integer.parseInt(inputArray[i]);
     if (i % 2 == 0) {
       x *= 2;
     }
@@ -70,5 +70,9 @@ protected boolean luhnAlgorithmValidator(String input) {
     return true;
   }
 }
+
+-------------
+
+### Running The Application
 
 
