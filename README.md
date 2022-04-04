@@ -92,5 +92,13 @@ protected boolean luhnAlgorithmValidator(String input) {
 -------------
 ### Final Thoughts
 
+I made this application to learn SQL and database management within the Java ecosystem. I choose JDBC to learn database management to challenge myself with writing my own 
+implementations of SQL's CRUD functions and handling SQL exceptions. I made it a simple credit card application to provide context to real world applications and learn more 
+about OOP, security and data structures within the Java landscape. 
 
+This was a rewarding project, and I learned a great deal about the fundamentals of database management and writing SQL commands within a Java application. In the future I would 
+like to learn more about how modern day financial institutions validate and check if a credit card or bank account number is valid and using JDBC for other types of data 
+management. 
 
+Note: This application was developed to learn about SQL, JDBC and Java. If anyone would like to use it there is a presumption that they know how to install SQLite and how to 
+set their SQLite up with the correct drivers and directory. The application runs via command line arguments once SQLite has been set up properly. 
