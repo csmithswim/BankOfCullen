@@ -82,12 +82,15 @@ protected boolean luhnAlgorithmValidator(String input) {
 ![balance_functions](https://github.com/csmithswim/BankOfCullen/blob/main/images/Bank%20Of%20Cullen%20Balance%20Functions.gif)
 
 **Balance Transfer**
+
 ![balance_transfer](https://github.com/csmithswim/BankOfCullen/blob/main/images/Bank%20Transfer.gif)
 
 **Error Handling and Closing Account**
 
 ![error_handling_and_closing_account](https://github.com/csmithswim/BankOfCullen/blob/main/images/Error%20Handling%20and%20Closing%20Account.gif)
 
-
+-------------
 ### Final Thoughts
+
+
 
