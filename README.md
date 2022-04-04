@@ -43,7 +43,9 @@ A Simple Banking and Credit Card Java Application.
 
 ![luhn_algorithm](https://github.com/csmithswim/BankOfCullen/blob/main/images/Luhn%20Algorithm.png)
 
-Above illustrates the specific properties a number must have for it to be considered a valid credit card number. A number's check digit is calculated to validate the credit 
+Above illustrates the specific properties a number must have for it to be considered a valid credit card number according to the Luhn algorithm. A number's check digit is 
+calculated to 
+validate the credit 
 card number. 
 More information can be found here: https://en.wikipedia.org/wiki/Luhn_algorithm
 
@@ -63,16 +65,29 @@ protected boolean luhnAlgorithmValidator(String input) {
     sum += x;
   }
   if ((sum + Integer.parseInt(inputArray[inputArray.length - 1])) % 10 != 0) {
-  System.out.println("Probably you made a mistake in the card number. Please try  
-  again!");
-  return false;
+    System.out.println("Probably you made a mistake in the card number. Please try  
+    again!");
+    return false;
   } else {
     return true;
   }
 }
-
+```
 -------------
 
 ### Running The Application
 
+**User Login, Adding Income and Viewing Balance**
+
+![balance_functions](https://github.com/csmithswim/BankOfCullen/blob/main/images/Bank%20Of%20Cullen%20Balance%20Functions.gif)
+
+**Balance Transfer**
+[balance_transfer](https://github.com/csmithswim/BankOfCullen/blob/main/images/Bank%20Transfer.gif)
+
+**Error Handling and Closing Account**
+
+[error_handling_and_closing_account](https://github.com/csmithswim/BankOfCullen/blob/main/images/Error%20Handling%20and%20Closing%20Account.gif)
+
+
+### Final Thoughts
 
